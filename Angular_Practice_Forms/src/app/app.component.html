@@ -1,0 +1,94 @@
+<!-- <div>
+    <h1>User:</h1>
+    <form #userForm="ngForm" (ngSubmit)="submitForm(userForm)">
+        <div>
+            <label>Name:</label>
+            <input
+                type="text" 
+                id="name"
+                name="name"
+                [(ngModel)]="user.name"
+                required
+            />
+        </div>
+        <div>
+            <label>Email:</label>
+            <input
+                type="email" 
+                id="email"
+                name="email"
+                [(ngModel)]="user.email"
+                required
+            />
+        </div>
+        <div>
+            <button type="submit" [disabled]="userForm.invalid || !emailvalidation()">Submit</button>
+        </div>
+    </form>
+
+</div> -->
+
+
+<!-- Reactive Form -->
+<div>
+    <form [formGroup]="userForm" (ngSubmit)="formsubmit()">
+        <div>
+            <label for="name">Name:</label>
+            <input type="text"
+                   name="name"
+                   placeholder="name"
+                   id="name"
+                   formControlName="name"
+            />
+        </div>
+        <div>
+            <label for="email">Email:</label>
+            <input type="text"
+                   name="email"
+                   placeholder="email"
+                   id="email"
+                   formControlName="email"
+            />
+        </div>
+        <div formGroupName="address">
+                <label for="street">Street:</label>
+                <input type="text"
+                       name="street"
+                       placeholder="street"
+                       id="street"
+                       formControlName="street"
+                />
+                <label for="city">City:</label>
+                <input type="text"
+                       name="city"
+                       placeholder="city"
+                       id="city"
+                       formControlName="city"
+                />
+        </div>
+        <!-- <div formArrayName="phoneNumbers">
+            <div *ngFor="let p of phoneNumbers.controls; let i = index">
+                <label>Phone Number:</label>
+                <input type="text" />
+                <button type="button" (click)="removePhoneNumber(i)">Remove Phone Number</button>
+            </div>
+            <div>
+                <button type="button" (click)="addPhoneNumber()">Add Phone Number</button>
+            </div>
+        </div>
+        <div>
+            <button type="submit" [disabled]="!userForm.valid">Submit</button>
+        </div> -->
+        <div formArrayName="phoneNumbers">
+            <div *ngFor="let p of phoneNumbers.controls; let i = index">
+              <label>Phone Number: {{i + 1}}</label>
+              <input type="text" [formControlName]="i" />
+              <button type="button" (click)="removePhoneNumber(i)">Remove Phone Number</button>
+            </div>
+          </div>
+          <div>
+            <button type="button" (click)="addPhoneNumber()">Add Phone Number</button>
+          </div>
+    </form>
+
+</div>
